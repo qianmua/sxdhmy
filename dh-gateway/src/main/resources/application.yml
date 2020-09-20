@@ -1,0 +1,28 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: sxhd-gateway
+  cloud:
+      nacos:
+        discovery:
+          server-addr: 127.0.0.1:8848
+      gateway:
+        discovery:
+          locator:
+            lower-case-service-id: true
+        routes:
+          - id: admin_router
+            uri: lb://renren-fast
+            predicates:
+              - Path=/api/app/**
+          - id: admin_router2
+            uri: lb://renren-fast
+            predicates:
+              - Path=/api/sys/**
+          - id: product_router
+            uri: lb://sxdhmy_factory
+            predicates:
+              - Path=/api/service/**
+

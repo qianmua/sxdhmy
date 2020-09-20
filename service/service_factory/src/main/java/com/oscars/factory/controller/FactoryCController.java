@@ -24,7 +24,7 @@ import java.util.Map;
  * @since 2020-09-20
  */
 @RestController
-@RequestMapping("/factory/factory-c")
+@RequestMapping("/service/factory/factory-c")
 @Api("生产厂家")
 public class FactoryCController {
 
