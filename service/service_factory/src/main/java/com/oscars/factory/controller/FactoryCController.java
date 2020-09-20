@@ -3,6 +3,7 @@ package com.oscars.factory.controller;
 
 import com.oscars.common.R;
 import com.oscars.factory.entity.FactoryC;
+import com.oscars.factory.entity.bo.FactoryQueryByConditionBo;
 import com.oscars.factory.service.FactoryCService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,7 +40,9 @@ public class FactoryCController {
 
     @ApiOperation("条件查询")
     @PostMapping("/queryByCondition/{current}/{limit}")
-    public R queryByCondition(@PathVariable long current , @PathVariable long limit){
+    public R queryByCondition(@PathVariable long current , @PathVariable long limit,
+                              @RequestBody(required = false) FactoryQueryByConditionBo factoryQueryByConditionBo){
+
 
         return R.ok()
                 ;

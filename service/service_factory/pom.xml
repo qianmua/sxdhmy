@@ -11,13 +11,4 @@
 
     <artifactId>service_factory</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.oscars</groupId>
-            <artifactId>api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
-
 </project>

@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan( basePackages = {"com.oscars" })
-@MapperScan( basePackages = {"com.oscars"})
+@MapperScan( basePackages = {"com.oscars.factory.mapper"})
 public class FactoryApplicationBootstrap {
 
     public static void main(String[] args) {

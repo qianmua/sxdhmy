@@ -1,4 +1,4 @@
-package com.oscars.common;
+package com.oscars.service.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
@@ -18,12 +18,13 @@ public class AutoMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("gmtCreate" , new Date() , metaObject);
-        this.setFieldValByName("gmtModified" , new Date() , metaObject);
+//        this.setFieldValByName("gmtCreate" , new Date() , metaObject);
+//        this.setFieldValByName("gmtModified" , new Date() , metaObject);
+        this.setFieldValByName("CREATE_TIME" , new Date() , metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("gmtModified" , new Date() , metaObject);
+//        this.setFieldValByName("gmtModified" , new Date() , metaObject);
     }
 }

@@ -1,5 +1,6 @@
 package com.oscars.factory.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -20,7 +21,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="FactoryC对象", description="")
+@ApiModel(value="FactoryC对象", description="生产家")
 public class FactoryC implements Serializable {
 
     private static final long serialVersionUID=1L;
@@ -82,7 +83,7 @@ public class FactoryC implements Serializable {
     private String createDept;
 
     @ApiModelProperty(value = "创建日期")
-    @TableField("CREATE_TIME")
+    @TableField(value = "CREATE_TIME" , fill = FieldFill.INSERT )
     private Date createTime;
 
 
