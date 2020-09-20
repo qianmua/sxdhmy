@@ -1,5 +1,6 @@
 package com.oscars.factory;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -14,7 +15,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan( basePackages = {"com.oscars"})
+@ComponentScan( basePackages = {"com.oscars" })
+@MapperScan( basePackages = {"com.oscars"})
 public class FactoryApplicationBootstrap {
 
     public static void main(String[] args) {

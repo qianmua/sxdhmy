@@ -26,7 +26,7 @@ public class SwaggerConfig {
     @Bean
     public Docket webApi(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("WebApi")
+                .groupName("sxdhmy")
                 // base info
                 .apiInfo(webApiInfo())
                 .select()
@@ -39,10 +39,10 @@ public class SwaggerConfig {
 
     private ApiInfo webApiInfo(){
         return new ApiInfoBuilder()
-                .title("谦牧学院 API文档")
+                .title("陕西德宏贸易管理平台 API文档")
                 .description("接口 测试文档")
-                .version("200811")
-                .contact(new Contact("java" , "http://gugugua.xyz" , "hjcwyhasgo@163.com"))
+                .version("20200920")
+                .contact(new Contact("QIANMUA" , "http://gugugua.xyz" , "hjcwyhasgo@163.com"))
                 .build()
                 ;
     }

@@ -20,7 +20,7 @@
 
         <java.version>1.8</java.version>
         <guli.version>0.0.1-SNAPSHOT</guli.version>
-        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <mybatis-plus.version>3.3.1</mybatis-plus.version>
         <velocity.version>2.0</velocity.version>
         <swagger.version>2.9.2</swagger.version>
         <aliyun.oss.version>2.8.3</aliyun.oss.version>
@@ -70,6 +70,11 @@
                 <version>1.18.12</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.23</version>
+            </dependency>
 
             <!--Spring Cloud-->
             <dependency>

@@ -26,7 +26,7 @@ public class FactoryC implements Serializable {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "厂家id")
-      @TableId(value = "FACTORY_ID", type = IdType.AUTO)
+      @TableId(value = "FACTORY_ID", type = IdType.ASSIGN_ID)
     private Integer factoryId;
 
     @ApiModelProperty(value = "厂家全称")
