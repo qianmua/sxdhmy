@@ -28,7 +28,7 @@ public class FactoryC implements Serializable {
 
     @ApiModelProperty(value = "厂家id")
       @TableId(value = "FACTORY_ID", type = IdType.ASSIGN_ID)
-    private Integer factoryId;
+    private String factoryId;
 
     @ApiModelProperty(value = "厂家全称")
     @TableField("FULL_NAME")

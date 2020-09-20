@@ -20,7 +20,7 @@ public class AutoMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
 //        this.setFieldValByName("gmtCreate" , new Date() , metaObject);
 //        this.setFieldValByName("gmtModified" , new Date() , metaObject);
-        this.setFieldValByName("CREATE_TIME" , new Date() , metaObject);
+        this.setFieldValByName("createTime" , new Date() , metaObject);
     }
 
     @Override

@@ -19,7 +19,7 @@ import java.util.Date;
 @EqualsAndHashCode( callSuper = false)
 public class FactoryQueryByConditionBo {
     @ApiModelProperty(value = "厂家id")
-    private Integer factoryId;
+    private String factoryId;
     @ApiModelProperty(value = "厂家全称")
     private String fullName;
     @ApiModelProperty(value = "名称缩写")

@@ -57,6 +57,13 @@ public class R extends HashMap<String, Object> {
 		return new R();
 	}
 
+	/*public R put(Map<String , Object> map){
+        R r = new R();
+        r.put("code" , 0);
+        r.put("msg" , "success");
+        r.putAll(map);
+        return r;
+    }*/
 
 	@Override
     public R put(String key, Object value) {
