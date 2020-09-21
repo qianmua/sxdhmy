@@ -26,6 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/service/factory/factory-c")
 @Api("生产厂家")
+@CrossOrigin
 public class FactoryCController {
 
     @Autowired
