@@ -12,8 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -23,10 +25,10 @@ import java.util.Map;
  * @author qianmuna
  * @since 2020-09-20
  */
+//@CrossOrigin
 @RestController
 @RequestMapping("/service/factory/factory-c")
 @Api("生产厂家")
-@CrossOrigin
 public class FactoryCController {
 
     @Autowired
@@ -66,6 +68,24 @@ public class FactoryCController {
     public R updateByInfo(@RequestBody FactoryC factoryC){
         return factoryCService.updateById(factoryC)
                 ? R.ok() : R.error();
+    }
+
+    @ApiOperation("修改生产状态")
+    @PostMapping("/updateStatusById")
+    public R updateStatus(@RequestBody FactoryC factoryC){
+        return factoryCService.updateById(factoryC) ?
+                R.ok():
+                R.error();
+    }
+
+    @ApiOperation("批量删除")
+    @PostMapping("/batchRemove")
+    public R batchDelete(@RequestBody String[] rids){
+        System.out.println(rids);
+        if (rids != null)
+            factoryCService.removeByIds(Arrays.stream(rids).collect(Collectors.toList()));
+        return R.ok()
+                ;
     }
 
 

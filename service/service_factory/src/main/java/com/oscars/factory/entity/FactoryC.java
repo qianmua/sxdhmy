@@ -6,10 +6,13 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -83,6 +86,8 @@ public class FactoryC implements Serializable {
     private String createDept;
 
     @ApiModelProperty(value = "创建日期")
+//    @DateTimeFormat
+    @JsonFormat( pattern = "yyy-MM-dd HH:mm:ss")
     @TableField(value = "CREATE_TIME" , fill = FieldFill.INSERT )
     private Date createTime;
 

@@ -9,6 +9,12 @@ spring:
         discovery:
           server-addr: 127.0.0.1:8848
       gateway:
+#        globalcors:
+#          cors-configurations:
+#            '[/**]':
+#              allowedOrigins: "*"
+#              allowedMethods: "*"
+#              allowedHeaders: "*"
         routes:
           - id: admin_router
             uri: lb://renren-fast
