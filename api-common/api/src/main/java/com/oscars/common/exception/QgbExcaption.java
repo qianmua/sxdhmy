@@ -1,4 +1,4 @@
-package com.oscars.service.exception;
+package com.oscars.common.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

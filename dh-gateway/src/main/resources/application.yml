@@ -14,16 +14,25 @@ spring:
             uri: lb://renren-fast
             predicates:
               - Path=/api/app/**
-
+            filters:
+              - StripPrefix=1
           - id: admin_router2
             uri: lb://renren-fast
             predicates:
               - Path=/api/sys/**
-
+            filters:
+              - StripPrefix=1
           - id: product_router
-            uri: lb://sxdhmy_factory
+            uri: lb://sxdhmy-factory
             predicates:
               - Path=/api/admin/**
             filters:
+              - StripPrefix=2
+          - id: admin_router3
+            uri: lb://renren-fast
+            predicates:
+              - Path=/api/**
+            filters:
               - StripPrefix=1
+
 
