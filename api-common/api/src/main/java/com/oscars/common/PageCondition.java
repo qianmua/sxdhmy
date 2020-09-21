@@ -1,6 +1,7 @@
 package com.oscars.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @description :
  */
 @Component
-//@Scope("SCOPE_PROTOTYPE")
+@Scope("prototype")
 public class PageCondition<T> {
 
     public Map<String , Object> getConditionPageMap(Page<T> page){

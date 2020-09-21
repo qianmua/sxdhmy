@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ContractProductC对象", description="")
+@ApiModel(value="ContractProductC对象", description="购销合同明细")
 public class ContractProductC implements Serializable {
 
     private static final long serialVersionUID=1L;
