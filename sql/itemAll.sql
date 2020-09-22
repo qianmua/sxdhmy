@@ -36,7 +36,7 @@ create table ITEMS_C
 create table EXT_CPRODUCT_C
 (
     EXT_CPRODUCT_ID varchar(40) primary key ,-- EXT_CPRODUCT_ID(主键)
-    FACTORY_ID int not null, -- FACTORY_ID
+    FACTORY_ID varchar(40) not null, -- FACTORY_ID
     CONTRACT_PRODUCT_ID varchar(40) not null,-- CONTRACT_PRODUCT_ID
     CTYPE int not null,-- 类型[系统下拉列表]
     PRODUCT_NAME varchar(200) not null,-- 产品名称
@@ -45,7 +45,7 @@ create table EXT_CPRODUCT_C
     PRODUCT_DESC varchar(600) not null,-- 货物描述
     LOADING_RATE varchar(30) not null,-- 装率
     PACKING_UNIT varchar(10) not null,-- 包装单位
-    CNUMBER int not null,-- 数量
+    EXT_CNUMBER int not null,-- 数量
     OUT_NUMBER int not null,-- 实际出货数量
     FINISHED int not null,-- 是否出货完毕(0/1)
     GROSS_WEIGH float not null,-- 毛重

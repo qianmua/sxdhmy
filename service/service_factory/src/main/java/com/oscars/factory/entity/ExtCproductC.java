@@ -30,7 +30,7 @@ public class ExtCproductC implements Serializable {
     private String extCproductId;
 
     @TableField("FACTORY_ID")
-    private Integer factoryId;
+    private String factoryId;
 
     @TableField("CONTRACT_PRODUCT_ID")
     private String contractProductId;
@@ -56,8 +56,8 @@ public class ExtCproductC implements Serializable {
     @TableField("PACKING_UNIT")
     private String packingUnit;
 
-    @TableField("CNUMBER")
-    private Integer cnumber;
+    @TableField("EXT_CNUMBER")
+    private Integer extCnumber;
 
     @TableField("OUT_NUMBER")
     private Integer outNumber;

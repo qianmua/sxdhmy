@@ -21,6 +21,7 @@ public class ContractItemsVo {
     private String customName;
     private String contractNo;
     private Integer cnumber;
+    private Integer extCnumber;
     private String inputBy;
     private String checkBy;
     private String inspector;
