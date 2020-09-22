@@ -4,6 +4,7 @@ import com.oscars.factory.entity.ContractC;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.oscars.factory.entity.vo.ContractItemsVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,5 +19,7 @@ public interface ContractCService extends IService<ContractC> {
 
     boolean deleteByIdAndProId(String id);
 
-    Map<String, Object> queryByCondition(long current, long limit, ContractItemsVo contractItemsVo);
+    List<ContractItemsVo> queryByCondition(long current, long limit, ContractItemsVo contractItemsVo);
+
+    boolean removeByBatchIds(List<String> collect);
 }

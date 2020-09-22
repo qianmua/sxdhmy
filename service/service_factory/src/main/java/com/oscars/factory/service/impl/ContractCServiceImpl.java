@@ -6,17 +6,23 @@ import com.oscars.common.PageCondition;
 import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.ContractC;
 import com.oscars.factory.entity.ContractProductC;
+import com.oscars.factory.entity.ExtCproductC;
 import com.oscars.factory.entity.vo.ContractItemsVo;
 import com.oscars.factory.mapper.ContractCMapper;
 import com.oscars.factory.service.ContractCService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oscars.factory.service.ContractProductCService;
+import com.oscars.factory.service.ExtCproductCService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -32,27 +38,71 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
     @Autowired
     private ContractProductCService contractProductCService;
     @Autowired
-    private PageCondition<ContractC> pageCondition1;
-    @Autowired
-    private PageCondition<ContractProductC> pageCondition2;
+    private ExtCproductCService extCproductCService;
 
     @Override
     @Transactional( rollbackFor = QgbExcaption.class)
     public boolean deleteByIdAndProId(String id) {
         if (StringUtils.isEmpty(id))
             throw new QgbExcaption(20001 , "非法合同id");
+        boolean b = false;
+        boolean b1 = false;
 
-        return contractProductCService
-                .remove(new LambdaQueryWrapper<ContractProductC>().eq(ContractProductC::getContractId , id))
-                &&
-                removeById(id);
+        if (null != contractProductCService
+                .getOne(new LambdaQueryWrapper<ContractProductC>()
+                        .eq(ContractProductC::getContractId, id))){
+             b = extCproductCService.remove(new LambdaQueryWrapper<ExtCproductC>()
+                    .eq(ExtCproductC::getContractProductId, contractProductCService
+                            .getOne(new LambdaQueryWrapper<ContractProductC>()
+                                    .eq(ContractProductC::getContractId, id)).getContractProductId()
+                    ));
+             b1 = contractProductCService.remove(new LambdaQueryWrapper<ContractProductC>()
+                    .eq(ContractProductC::getContractId, id));
+        }
+
+
+        boolean b2 = removeById(id);
+        return b && b1 && b2;
     }
 
     @Override
-    public Map<String, Object> queryByCondition(long current, long limit, ContractItemsVo contractItemsVo) {
-        LambdaQueryWrapper<ContractC> wrapper = new LambdaQueryWrapper<>();
+    public List<ContractItemsVo> queryByCondition(long current, long limit, ContractItemsVo contractItemsVo) {
+
         Page<ContractC> page = new Page<>(current, limit);
         this.baseMapper.selectPage(page , null);
-        return pageCondition1.getConditionPageMap(page);
+        // info
+        List<ContractC> records = page.getRecords();
+
+        List<ContractItemsVo> list = new ArrayList<>();
+        // queryItems
+        Objects.requireNonNull(records).forEach(v1 -> {
+            ContractItemsVo vo = new ContractItemsVo();
+            // 合同明细
+            ContractProductC byId = contractProductCService
+                    .getOne(new LambdaQueryWrapper<ContractProductC>()
+                            .eq(ContractProductC::getContractId , v1.getContractId()));
+            ExtCproductC one = null;
+            if (byId != null){
+                // 合同附件
+                 one = extCproductCService.getOne(new LambdaQueryWrapper<ExtCproductC>()
+                        .select(ExtCproductC::getExtCnumber)
+                        .eq(ExtCproductC::getContractProductId, byId.getContractProductId()));
+
+                BeanUtils.copyProperties(byId, vo);
+                BeanUtils.copyProperties(one , vo);
+            }
+
+            BeanUtils.copyProperties(v1 , vo);
+
+            list.add(vo);
+        });
+
+        return list;
     }
+
+    @Override
+    public boolean removeByBatchIds(List<String> collect) {
+        return false;
+    }
+
 }

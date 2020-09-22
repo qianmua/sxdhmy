@@ -11,6 +11,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * <p>
  *  前端控制器
@@ -29,9 +33,9 @@ public class ContractCController {
 
     @ApiOperation("添加购销合同")
     @PutMapping("/addInfo")
-    public R addInfo(@RequestBody ContractC c){
-
-        return R.ok()
+    public R addInfo(@RequestBody ContractC contractC){
+        return this.contractCService.save(contractC) ?
+                R.ok() : R.error()
                 ;
     }
 
@@ -47,24 +51,32 @@ public class ContractCController {
 
     @ApiOperation("上报")
     @PostMapping("/updateStatusInfo")
-    public R updateStatus(){
-
-        return R.ok();
+    public R updateStatus(@RequestBody ContractC contractC){
+        return contractCService.updateById(contractC)?
+                R.ok() : R.error();
     }
 
     @ApiOperation("修改合同")
     @PostMapping("/updateInfo")
-    public R updateInfo(){
-
-        return R.ok();
+    public R updateInfo(@RequestBody ContractC contractC){
+        return this.contractCService.updateById(contractC) ?R.ok() : R.error();
     }
 
     @ApiOperation("分页条件查询全部购销合同")
     @PostMapping("/queryByCondition/{current}/{limit}")
     public R condition(@PathVariable long current , @PathVariable long limit ,
                        @RequestBody(required = false)ContractItemsVo contractItemsVo){
+        List<ContractItemsVo> itemsVos = contractCService.queryByCondition(current, limit, contractItemsVo);
+        return R.ok()
+                .put("rows" ,itemsVos );
+    }
 
-        return R.ok(contractCService.queryByCondition(current , limit , contractItemsVo));
+    @ApiOperation("批量删除合同")
+    @PostMapping("/deleteBatch")
+    public R rmBatch(@PathVariable String[] ids){
+
+        return contractCService.removeByBatchIds(Arrays.stream(ids).collect(Collectors.toList())) ?
+                R.ok() : R.error();
     }
 
 

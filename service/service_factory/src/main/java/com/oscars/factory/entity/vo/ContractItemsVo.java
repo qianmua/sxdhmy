@@ -1,5 +1,6 @@
 package com.oscars.factory.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,7 @@ import java.util.Date;
 @EqualsAndHashCode( callSuper = false)
 public class ContractItemsVo {
 
+    private String contractId;
     private String customName;
     private String contractNo;
     private Integer cnumber;
@@ -25,8 +27,11 @@ public class ContractItemsVo {
     private String inputBy;
     private String checkBy;
     private String inspector;
+    @JsonFormat( pattern = "yyy-MM-dd HH:mm:ss" , timezone = "GMT+8")
     private Date signingDate;
+    @JsonFormat( pattern = "yyy-MM-dd HH:mm:ss" , timezone = "GMT+8")
     private Date deliveryPeriod;
+    @JsonFormat( pattern = "yyy-MM-dd HH:mm:ss" , timezone = "GMT+8")
     private Date shipTime;
     private Float amount;
     private Integer state;

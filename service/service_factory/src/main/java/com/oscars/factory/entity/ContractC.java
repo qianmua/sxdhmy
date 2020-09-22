@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -40,6 +41,8 @@ public class ContractC implements Serializable {
     private String contractNo;
 
     @TableField("SIGNING_DATE")
+    @JsonFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date signingDate;
 
     @TableField("INPUT_BY")
@@ -61,12 +64,16 @@ public class ContractC implements Serializable {
     private String customName;
 
     @TableField("SHIP_TIME")
+    @JsonFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date shipTime;
 
     @TableField("IMPORT_NUM")
     private Integer importNum;
 
     @TableField("DELIVERY_PERIOD")
+    @JsonFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date deliveryPeriod;
 
     @TableField("REMARK")
@@ -91,7 +98,7 @@ public class ContractC implements Serializable {
     private String createDept;
 
     @TableField(value = "CREATE_TIME" , fill = FieldFill.INSERT)
-    @JsonFormat( pattern = "yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date createTime;
 
 

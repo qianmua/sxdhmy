@@ -87,7 +87,7 @@ public class FactoryC implements Serializable {
 
     @ApiModelProperty(value = "创建日期")
 //    @DateTimeFormat
-    @JsonFormat( pattern = "yyy-MM-dd HH:mm:ss")
+    @JsonFormat( pattern = "yyy-MM-dd HH:mm:ss" , timezone = "GMT+8")
     @TableField(value = "CREATE_TIME" , fill = FieldFill.INSERT )
     private Date createTime;
 
