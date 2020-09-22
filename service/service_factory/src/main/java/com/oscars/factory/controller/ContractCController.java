@@ -31,6 +31,12 @@ public class ContractCController {
     @Autowired
     private ContractCService contractCService;
 
+    @ApiOperation("根据id查询合同")
+    @GetMapping("/queryById/{id}")
+    public R queryById(@PathVariable String id){
+        return R.ok().put("info" ,contractCService.getById(id));
+    }
+
     @ApiOperation("添加购销合同")
     @PutMapping("/addInfo")
     public R addInfo(@RequestBody ContractC contractC){
@@ -58,8 +64,10 @@ public class ContractCController {
 
     @ApiOperation("修改合同")
     @PostMapping("/updateInfo")
-    public R updateInfo(@RequestBody ContractC contractC){
-        return this.contractCService.updateById(contractC) ?R.ok() : R.error();
+    public R updateInfo(@RequestBody String[] ids){
+
+        return contractCService.updateBatchStatus(Arrays.stream(ids).collect(Collectors.toList()))
+                ? R.ok() :R.error();
     }
 
     @ApiOperation("分页条件查询全部购销合同")
@@ -73,7 +81,7 @@ public class ContractCController {
 
     @ApiOperation("批量删除合同")
     @PostMapping("/deleteBatch")
-    public R rmBatch(@PathVariable String[] ids){
+    public R rmBatch(@RequestBody String[] ids){
 
         return contractCService.removeByBatchIds(Arrays.stream(ids).collect(Collectors.toList())) ?
                 R.ok() : R.error();

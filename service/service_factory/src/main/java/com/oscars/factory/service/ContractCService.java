@@ -22,4 +22,6 @@ public interface ContractCService extends IService<ContractC> {
     List<ContractItemsVo> queryByCondition(long current, long limit, ContractItemsVo contractItemsVo);
 
     boolean removeByBatchIds(List<String> collect);
+
+    boolean updateBatchStatus(List<String> collect);
 }

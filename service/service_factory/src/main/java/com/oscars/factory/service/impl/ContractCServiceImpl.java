@@ -102,7 +102,19 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
     @Override
     public boolean removeByBatchIds(List<String> collect) {
-        return false;
+        collect.forEach(v1 -> {
+            boolean b = this.deleteByIdAndProId(v1);
+        });
+        return true;
+    }
+
+    @Override
+    public boolean updateBatchStatus(List<String> collect) {
+
+        List<ContractC> batch = new ArrayList<>();
+        collect.forEach(v1 -> batch.add(new ContractC().setContractId(v1).setState(2)));
+
+        return this.updateBatchById(batch);
     }
 
 }
