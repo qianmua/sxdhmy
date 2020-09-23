@@ -3,6 +3,8 @@ package com.oscars.factory.service;
 import com.oscars.factory.entity.ContractProductC;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ContractProductCService extends IService<ContractProductC> {
 
+    List<ContractProductC> queryListByCid(String id, long current, long limit);
 }

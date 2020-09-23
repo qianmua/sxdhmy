@@ -23,6 +23,12 @@ spring:
   application:
     name: sxdhmy-factory
 
+  devtools:
+    restart:
+      enabled: true
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
