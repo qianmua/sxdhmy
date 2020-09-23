@@ -70,6 +70,7 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
         Page<ContractC> page = new Page<>(current, limit);
         this.baseMapper.selectPage(page , null);
+
         // info
         List<ContractC> records = page.getRecords();
 
@@ -77,19 +78,32 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
         // queryItems
         Objects.requireNonNull(records).forEach(v1 -> {
             ContractItemsVo vo = new ContractItemsVo();
+
+            vo.setCnumber(0);
+            vo.setExtCnumber(0);
+
             // 合同明细
             ContractProductC byId = contractProductCService
                     .getOne(new LambdaQueryWrapper<ContractProductC>()
                             .eq(ContractProductC::getContractId , v1.getContractId()));
-            ExtCproductC one = null;
+            int count = contractProductCService.count(new LambdaQueryWrapper<ContractProductC>()
+                    .eq(ContractProductC::getContractId, v1.getContractId()));
+
+            vo.setCnumber(count);
+
+//            ExtCproductC one = null;
             if (byId != null){
                 // 合同附件
-                 one = extCproductCService.getOne(new LambdaQueryWrapper<ExtCproductC>()
-                        .select(ExtCproductC::getExtCnumber)
+//                 one = extCproductCService.getOne(new LambdaQueryWrapper<ExtCproductC>()
+//                        .select(ExtCproductC::getExtCnumber)
+//                        .eq(ExtCproductC::getContractProductId, byId.getContractProductId()));
+
+//                BeanUtils.copyProperties(byId, vo);
+//                BeanUtils.copyProperties(one , vo);
+                int count1 = extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
                         .eq(ExtCproductC::getContractProductId, byId.getContractProductId()));
 
-                BeanUtils.copyProperties(byId, vo);
-                BeanUtils.copyProperties(one , vo);
+                vo.setExtCnumber(count1);
             }
 
             BeanUtils.copyProperties(v1 , vo);
