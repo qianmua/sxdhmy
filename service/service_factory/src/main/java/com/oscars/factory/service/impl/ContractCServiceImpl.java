@@ -83,8 +83,8 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
             vo.setExtCnumber(0);
 
             // 合同明细
-            ContractProductC byId = contractProductCService
-                    .getOne(new LambdaQueryWrapper<ContractProductC>()
+            List<ContractProductC> byId = contractProductCService
+                    .list(new LambdaQueryWrapper<ContractProductC>()
                             .eq(ContractProductC::getContractId , v1.getContractId()));
             int count = contractProductCService.count(new LambdaQueryWrapper<ContractProductC>()
                     .eq(ContractProductC::getContractId, v1.getContractId()));
@@ -92,7 +92,7 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
             vo.setCnumber(count);
 
 //            ExtCproductC one = null;
-            if (byId != null){
+            if (!byId.isEmpty()){
                 // 合同附件
 //                 one = extCproductCService.getOne(new LambdaQueryWrapper<ExtCproductC>()
 //                        .select(ExtCproductC::getExtCnumber)
@@ -101,7 +101,7 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 //                BeanUtils.copyProperties(byId, vo);
 //                BeanUtils.copyProperties(one , vo);
                 int count1 = extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
-                        .eq(ExtCproductC::getContractProductId, byId.getContractProductId()));
+                        .eq(ExtCproductC::getContractProductId, byId.get(0).getContractProductId()));
 
                 vo.setExtCnumber(count1);
             }

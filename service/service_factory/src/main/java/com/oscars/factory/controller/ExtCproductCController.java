@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-09-22
  */
 @RestController
-@RequestMapping("/factory/ext-cproduct-c")
+@RequestMapping("/service/factory/ext-cproduct-c")
 public class ExtCproductCController {
 
 }

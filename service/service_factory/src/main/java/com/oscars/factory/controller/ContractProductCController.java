@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2020-09-22
  */
 @RestController
-@RequestMapping("/factory/contract-product-c")
+@RequestMapping("/service/factory/contract-product-c")
 @Api("货物表 ， 商品明细")
 public class ContractProductCController {
 
