@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -51,6 +53,19 @@ public class ExtCproductCController {
     public R removeBatch(@PathVariable String cid){
         return extCproductCService.removeBatch(cid)?
                 R.ok() : R.error();
+    }
+    @ApiOperation("根据id查询附件信息")
+    @GetMapping("/queryById/{id}")
+    public R queryById(@PathVariable String id){
+        return R.ok().put("info" , extCproductCService.getById(id));
+    }
+
+    @ApiOperation("查询当前订单下全部附件")
+    @PostMapping("/queryAll/{id}/{current}/{limit}")
+    public R queryAll(@PathVariable String id , @PathVariable long current , @PathVariable long limit){
+        List<ExtCproductC> rows = extCproductCService.queryAllByCpId(id , current , limit);
+
+        return R.ok().put("rows" , rows);
     }
 
 }

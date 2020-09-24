@@ -3,6 +3,7 @@ package com.oscars.factory.controller;
 
 import com.oscars.common.R;
 import com.oscars.factory.entity.ContractProductC;
+import com.oscars.factory.entity.ExtCproductC;
 import com.oscars.factory.service.ContractProductCService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -70,6 +71,8 @@ public class ContractProductCController {
                 R.ok() :R.error()
                 ;
     }
+
+
 
 
 
