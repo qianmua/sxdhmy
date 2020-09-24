@@ -1,6 +1,7 @@
 package com.oscars.factory.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oscars.common.R;
 import com.oscars.factory.entity.ContractProductC;
 import com.oscars.factory.entity.ExtCproductC;
@@ -54,6 +55,13 @@ public class ContractProductCController {
                 .put("rows" , list)
                 ;
     }
+    @ApiOperation("查询所有货物信息")
+    @PostMapping("queryAllInfo/{current}/{limit}")
+    public R queryAll(@PathVariable long current ,@PathVariable long limit ){
+        return R.ok()
+                .put("rows" , contractProductCService.page(new Page<>(current , limit)));
+    }
+
 
     @ApiOperation("删除货物信息，级联删除")
     @DeleteMapping("/deleteById/{id}")
