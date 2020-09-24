@@ -16,4 +16,6 @@ import java.util.List;
 public interface ContractProductCService extends IService<ContractProductC> {
 
     List<ContractProductC> queryListByCid(String id, long current, long limit);
+
+    boolean removeBatch(String id);
 }

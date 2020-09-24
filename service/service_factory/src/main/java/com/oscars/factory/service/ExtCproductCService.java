@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ExtCproductCService extends IService<ExtCproductC> {
 
+    boolean removeBatch(String cid);
 }

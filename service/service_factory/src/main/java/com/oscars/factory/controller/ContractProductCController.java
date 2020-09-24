@@ -54,11 +54,11 @@ public class ContractProductCController {
                 ;
     }
 
-    @ApiOperation("删除货物信息")
+    @ApiOperation("删除货物信息，级联删除")
     @DeleteMapping("/deleteById/{id}")
     public R deleteInfo(@PathVariable String id){
 
-        return contractProductCService.removeById(id)?
+        return contractProductCService.removeBatch(id)?
                 R.ok() : R.error()
                 ;
     }
@@ -70,6 +70,8 @@ public class ContractProductCController {
                 R.ok() :R.error()
                 ;
     }
+
+
 
 }
 

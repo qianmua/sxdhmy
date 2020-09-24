@@ -2,11 +2,15 @@ package com.oscars.factory.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.ContractProductC;
 import com.oscars.factory.mapper.ContractProductCMapper;
 import com.oscars.factory.service.ContractProductCService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.oscars.factory.service.ExtCproductCService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +25,9 @@ import java.util.List;
 @Service
 public class ContractProductCServiceImpl extends ServiceImpl<ContractProductCMapper, ContractProductC> implements ContractProductCService {
 
+    @Autowired
+    private ExtCproductCService extCproductCService;
+
     @Override
     public List<ContractProductC> queryListByCid(String id, long current, long limit) {
         Page<ContractProductC> page = new Page<>(current, limit);
@@ -30,5 +37,12 @@ public class ContractProductCServiceImpl extends ServiceImpl<ContractProductCMap
 
         // list
         return page.getRecords();
+    }
+
+    @Override
+    @Transactional(rollbackFor = QgbExcaption.class)
+    public boolean removeBatch(String id) {
+        extCproductCService.removeBatch(id);
+        return this.removeById(id);
     }
 }
