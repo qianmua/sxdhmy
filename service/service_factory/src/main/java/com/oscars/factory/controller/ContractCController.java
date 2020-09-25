@@ -88,5 +88,13 @@ public class ContractCController {
     }
 
 
+    @ApiOperation("查询合同下 所有货物附件信息")
+    @PostMapping("/queryAllInfoByCid/{id}")
+    public R queryAllInfoCid(@PathVariable String id){
+        return R.ok()
+                .put("rows" , contractCService.queryByConditionAll(id));
+    }
+
+
 }
 

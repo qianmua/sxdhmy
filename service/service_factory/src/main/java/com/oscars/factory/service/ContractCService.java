@@ -24,4 +24,6 @@ public interface ContractCService extends IService<ContractC> {
     boolean removeByBatchIds(List<String> collect);
 
     boolean updateBatchStatus(List<String> collect);
+
+    Object queryByConditionAll(String id);
 }

@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * <p>
@@ -130,5 +127,32 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
         return this.updateBatchById(batch);
     }
+
+    @Override
+    public Object queryByConditionAll(String id) {
+        ArrayList<Object> list = new ArrayList<>();
+        ContractC byId = this.getById(id);
+        if (Optional.ofNullable(byId).isPresent()) {
+
+        }
+        return list;
+    }
+
+    /**
+     * 遍历货物
+     * @param id 合同id
+     */
+    private void getAllCpDataByCid(String id){
+
+    }
+
+    /**
+     * 遍历附件
+     * @param id 货物id
+     */
+    private void getAllDataByCpId(String id){
+
+    }
+
 
 }
