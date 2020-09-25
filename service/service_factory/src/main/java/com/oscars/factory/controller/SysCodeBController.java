@@ -1,6 +1,7 @@
 package com.oscars.factory.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oscars.common.R;
 import com.oscars.factory.entity.SysCodeB;
@@ -35,7 +36,9 @@ public class SysCodeBController {
     public R queryAll(@PathVariable long current , @PathVariable long limit){
 
         return R.ok()
-                .put("rows" ,sysCodeBService.page(new Page<>(current, limit) , null).getRecords());
+                .put("rows" ,sysCodeBService
+                        .page(new Page<>(current, limit) , new LambdaQueryWrapper<SysCodeB>().eq(SysCodeB::getParentId , "0104"))
+                        .getRecords());
     }
 
 }
