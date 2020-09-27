@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -97,10 +98,22 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
 //                BeanUtils.copyProperties(byId, vo);
 //                BeanUtils.copyProperties(one , vo);
-                int count1 = extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
-                        .eq(ExtCproductC::getContractProductId, byId.get(0).getContractProductId()));
 
-                vo.setExtCnumber(count1);
+                int sum = byId.stream()
+                        .map(ContractProductC::getContractProductId)
+                        .map(cpId -> extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
+                                .eq(ExtCproductC::getContractProductId, cpId)))
+                        .collect(Collectors.toList())
+                        .stream()
+                        .mapToInt(value -> value).sum();
+
+//                System.out.println(sum);
+
+
+                /*int count1 = extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
+                        .eq(ExtCproductC::getContractProductId, byId.get(0).getContractProductId()));*/
+
+                vo.setExtCnumber(sum);
             }
 
             BeanUtils.copyProperties(v1 , vo);
