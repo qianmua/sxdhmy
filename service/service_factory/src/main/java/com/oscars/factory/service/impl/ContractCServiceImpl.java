@@ -9,6 +9,7 @@ import com.oscars.factory.entity.ContractProductC;
 import com.oscars.factory.entity.ExtCproductC;
 import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
+import com.oscars.factory.entity.vo.ContractProductCVo;
 import com.oscars.factory.entity.vo.ContractProductitemVo;
 import com.oscars.factory.mapper.ContractCMapper;
 import com.oscars.factory.service.ContractCService;
@@ -91,7 +92,8 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
             vo.setCnumber(count);
 
-            vo.setContractProductCS(byId);
+//            vo.setContractProductCS(byId);
+            List<ContractProductCVo> list2 = new ArrayList<>();
 
 //            ExtCproductC one = null;
             if (!byId.isEmpty()){
@@ -104,6 +106,16 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 //                BeanUtils.copyProperties(one , vo);
 
                 int sum = byId.stream()
+                        .peek(vs -> {
+                            ContractProductCVo cVo = new ContractProductCVo();
+                            cVo.setExtCount(extCproductCService
+                                    .count(new LambdaQueryWrapper<ExtCproductC>()
+                                    .eq(ExtCproductC::getContractProductId, vs.getContractProductId()))
+                            );
+
+                            BeanUtils.copyProperties(vs , cVo);
+                            list2.add(cVo);
+                        })
                         .map(ContractProductC::getContractProductId)
                         .map(cpId -> extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
                                 .eq(ExtCproductC::getContractProductId, cpId)))
@@ -119,6 +131,9 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
                 vo.setExtCnumber(sum);
             }
+
+
+            vo.setContractProductCS(list2);
 
             BeanUtils.copyProperties(v1 , vo);
 

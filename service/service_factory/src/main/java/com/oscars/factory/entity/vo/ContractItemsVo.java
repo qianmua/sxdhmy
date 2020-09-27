@@ -21,6 +21,11 @@ import java.util.List;
 @EqualsAndHashCode( callSuper = false)
 public class ContractItemsVo {
 
+    private String offeror;
+    private String request;
+    private String remark;
+    private Integer printStyle;
+    private Integer importNum;
     private String contractId;
     private String customName;
     private String contractNo;
@@ -38,7 +43,7 @@ public class ContractItemsVo {
     private Float amount;
     private Integer state;
 
-    private List<ContractProductC> contractProductCS;
+    private List<ContractProductCVo> contractProductCS;
 
 
 }
