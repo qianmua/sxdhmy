@@ -3,6 +3,7 @@ package com.oscars.factory.controller;
 
 import com.oscars.common.R;
 import com.oscars.factory.entity.ContractC;
+import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
 import com.oscars.factory.service.ContractCService;
 import com.oscars.factory.service.ContractProductCService;
@@ -93,6 +94,17 @@ public class ContractCController {
     public R queryAllInfoCid(@PathVariable String id){
         return R.ok()
                 .put("rows" , contractCService.queryByConditionAll(id));
+    }
+
+    @ApiOperation("查询合同详细信息")
+    @GetMapping("/queryCItem/{id}")
+    public R queryItem(@PathVariable String id){
+
+        ContractItemVo vo = contractCService.queryItems(id);
+
+        return R.ok()
+                .put("info" , vo);
+
     }
 
 

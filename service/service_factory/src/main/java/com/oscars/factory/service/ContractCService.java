@@ -2,6 +2,7 @@ package com.oscars.factory.service;
 
 import com.oscars.factory.entity.ContractC;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface ContractCService extends IService<ContractC> {
     boolean updateBatchStatus(List<String> collect);
 
     Object queryByConditionAll(String id);
+
+    ContractItemVo queryItems(String id);
 }

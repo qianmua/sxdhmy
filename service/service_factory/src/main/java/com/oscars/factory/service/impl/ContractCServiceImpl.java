@@ -7,7 +7,9 @@ import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.ContractC;
 import com.oscars.factory.entity.ContractProductC;
 import com.oscars.factory.entity.ExtCproductC;
+import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
+import com.oscars.factory.entity.vo.ContractProductitemVo;
 import com.oscars.factory.mapper.ContractCMapper;
 import com.oscars.factory.service.ContractCService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -139,6 +141,35 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
         collect.forEach(v1 -> batch.add(new ContractC().setContractId(v1).setState(2)));
 
         return this.updateBatchById(batch);
+    }
+
+    @Override
+    public ContractItemVo queryItems(String id) {
+        // 当前合同
+        ContractC byId = this.getById(id);
+        // All info
+        ContractItemVo vo = new ContractItemVo();
+        if (Optional.ofNullable(byId).isPresent()) {
+            // 合同下 货物
+            List<ContractProductC> list = contractProductCService.list(new LambdaQueryWrapper<ContractProductC>()
+                    .eq(ContractProductC::getContractId, byId.getContractId()));
+
+            List<ContractProductitemVo> voCp = new ArrayList<>();
+
+            if (!list.isEmpty()){
+                //货物下附件
+                list.forEach(v1 -> {
+                    List<ExtCproductC> list1 = extCproductCService.list(new LambdaQueryWrapper<ExtCproductC>()
+                            .eq(ExtCproductC::getContractProductId, v1.getContractProductId()));
+
+                    voCp.add( new ContractProductitemVo().setContractProductC(v1).setExtCproductCS(list1));
+                });
+                vo.setContractC(byId).setContractProductC(voCp);
+            }
+        }
+
+
+        return vo;
     }
 
     @Override
