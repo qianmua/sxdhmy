@@ -1,11 +1,13 @@
 package com.oscars.factory.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.oscars.factory.entity.ContractProductC;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author HJC
@@ -35,6 +37,8 @@ public class ContractItemsVo {
     private Date shipTime;
     private Float amount;
     private Integer state;
+
+    private List<ContractProductC> contractProductCS;
 
 
 }

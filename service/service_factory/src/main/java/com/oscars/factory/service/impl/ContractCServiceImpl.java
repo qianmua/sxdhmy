@@ -91,6 +91,8 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
             vo.setCnumber(count);
 
+            vo.setContractProductCS(byId);
+
 //            ExtCproductC one = null;
             if (!byId.isEmpty()){
                 // 合同附件
@@ -167,7 +169,6 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
                 vo.setContractC(byId).setContractProductC(voCp);
             }
         }
-
 
         return vo;
     }
