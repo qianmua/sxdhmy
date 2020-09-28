@@ -87,10 +87,14 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
             List<ContractProductC> byId = contractProductCService
                     .list(new LambdaQueryWrapper<ContractProductC>()
                             .eq(ContractProductC::getContractId , v1.getContractId()));
+
             int count = contractProductCService.count(new LambdaQueryWrapper<ContractProductC>()
                     .eq(ContractProductC::getContractId, v1.getContractId()));
 
+            double sum2 = byId.stream().map(ContractProductC::getPrice).mapToDouble(sumv -> sumv).sum();
+
             vo.setCnumber(count);
+            vo.setAmount((float) sum2);
 
 //            vo.setContractProductCS(byId);
             List<ContractProductCVo> list2 = new ArrayList<>();
