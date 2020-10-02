@@ -4,6 +4,7 @@ import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.ofs.service.TableProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,12 @@ public class TableProductServiceImpl implements TableProductService {
 
     @Override
     public Integer saveBatchAll(List<TableExcelModelDto> tableExcelModelDtos) {
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<TableExcelModelDto> getGenDataByDate(String date) {
 
         return null;
     }

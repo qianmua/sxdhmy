@@ -2,6 +2,7 @@ package com.oscars.factory.controller;
 
 
 import com.oscars.common.R;
+import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.factory.entity.ContractC;
 import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -105,6 +107,14 @@ public class ContractCController {
         return R.ok()
                 .put("info" , vo);
 
+    }
+    @ApiOperation("查询打印信息")
+    @GetMapping("/queryTableListByDate")
+    public R tableList(String date){
+        List<TableExcelModelDto> list = contractCService.queryTableList(date);
+        return list == null ?
+                R.ok().put("rows" , list)
+                : R.error("请检查日期格式，或者联系管理员查看详细日志");
     }
 
 

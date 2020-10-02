@@ -1,5 +1,6 @@
 package com.oscars.factory.service;
 
+import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.factory.entity.ContractC;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.oscars.factory.entity.vo.ContractItemVo;
@@ -29,4 +30,6 @@ public interface ContractCService extends IService<ContractC> {
     Object queryByConditionAll(String id);
 
     ContractItemVo queryItems(String id);
+
+    List<TableExcelModelDto> queryTableList(String date);
 }

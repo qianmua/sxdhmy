@@ -34,6 +34,12 @@ spring:
               - Path=/api/admin/**
             filters:
               - StripPrefix=2
+          - id: ofs_router
+            uri: lb://service-ofs
+            predicates:
+              - Path=/api/ofs/**
+            filters:
+              - StripPrefix=2
           - id: admin_router3
             uri: lb://renren-fast
             predicates:

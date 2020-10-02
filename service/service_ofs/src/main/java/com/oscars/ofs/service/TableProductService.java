@@ -2,6 +2,7 @@ package com.oscars.ofs.service;
 
 import com.oscars.common.dto.TableExcelModelDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,4 +19,6 @@ public interface TableProductService {
      * @return row
      */
     Integer saveBatchAll(List<TableExcelModelDto> tableExcelModelDtos);
+
+    ArrayList<TableExcelModelDto> getGenDataByDate(String date);
 }

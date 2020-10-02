@@ -1,8 +1,10 @@
 package com.oscars.factory.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.oscars.common.PageCondition;
+import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.ContractC;
 import com.oscars.factory.entity.ContractProductC;
@@ -16,12 +18,15 @@ import com.oscars.factory.service.ContractCService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oscars.factory.service.ContractProductCService;
 import com.oscars.factory.service.ExtCproductCService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,6 +39,7 @@ import java.util.stream.Collectors;
  * @since 2020-09-22
  */
 @Service
+@Slf4j
 public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC> implements ContractCService {
 
     @Autowired
@@ -218,5 +224,20 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
     }
 
+    @Override
+    public List<TableExcelModelDto> queryTableList(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date parse = format.parse(date);
 
+            this.baseMapper.selectList();
+
+        } catch (ParseException e) {
+            log.error("date trans err {}" , e.getMessage());
+            return null;
+        }
+
+
+        return null;
+    }
 }

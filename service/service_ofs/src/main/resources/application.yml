@@ -3,9 +3,11 @@ server:
 
 spring:
   application:
-    name: service_ofs
+    name: service-ofs
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-
+feign:
+  hystrix:
+    enabled: true
