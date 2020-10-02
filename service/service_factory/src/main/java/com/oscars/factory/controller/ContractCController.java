@@ -108,6 +108,7 @@ public class ContractCController {
                 .put("info" , vo);
 
     }
+
     @ApiOperation("查询打印信息")
     @GetMapping("/queryTableListByDate")
     public R tableList(String date){

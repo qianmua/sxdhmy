@@ -20,5 +20,5 @@ public interface TableProductService {
      */
     Integer saveBatchAll(List<TableExcelModelDto> tableExcelModelDtos);
 
-    ArrayList<TableExcelModelDto> getGenDataByDate(String date);
+    List<TableExcelModelDto> getGenDataByDate(String date);
 }

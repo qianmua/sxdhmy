@@ -69,7 +69,7 @@ public class TableOptionProductController {
     }
 
     private List<TableExcelModelDto> data(String date){
-        ArrayList<TableExcelModelDto> list = new ArrayList<>();
+        List<TableExcelModelDto> list = new ArrayList<>();
 
         // get data
         list = tableProductService.getGenDataByDate(date);
