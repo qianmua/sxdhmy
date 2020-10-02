@@ -113,7 +113,7 @@ public class ContractCController {
     @GetMapping("/queryTableListByDate")
     public R tableList(String date){
         List<TableExcelModelDto> list = contractCService.queryTableList(date);
-        return list == null ?
+        return list != null ?
                 R.ok().put("rows" , list)
                 : R.error("请检查日期格式，或者联系管理员查看详细日志");
     }

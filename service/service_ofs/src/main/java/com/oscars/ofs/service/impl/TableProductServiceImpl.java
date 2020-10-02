@@ -36,14 +36,15 @@ public class TableProductServiceImpl implements TableProductService {
     @Override
     public List<TableExcelModelDto> getGenDataByDate(String date) {
         log.info("debug info -> {}" , date);
-        R r = tableOptionFormFactory.tableList(date);
-        List<TableExcelModelDto> rows = new ArrayList<>();
-        try {
 
+        R r = tableOptionFormFactory.tableList(date);
+
+        List<TableExcelModelDto> rows = new ArrayList<>();
+
+        try {
 //            rows = JSON.toJavaObject(r.get("rows") , List.class) ;
             System.out.println(r.get("rows"));
 //            rows = JSONObject.parseArray(r.get("rows") , TableExcelModelDto.class);
-
         }catch (Exception e){
             log.error("tans err info {}", r.get("rows"));
             return null;

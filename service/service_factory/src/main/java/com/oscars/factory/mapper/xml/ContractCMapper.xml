@@ -4,7 +4,10 @@
     
     <select id="queryTablist" resultType="com.oscars.common.dto.TableExcelModelDto" >
         SELECT
-            CUSTOM_NAME,CONTRACT_NO ,PRODUCT_NO,CNUMBER,FACTORY,DELIVERY_PERIOD,SHIP_TIME
+            CUSTOM_NAME as customName,CONTRACT_NO as contractNo,
+            PRODUCT_NO as productNo,CNUMBER as cnumber,
+            FACTORY as factory,DELIVERY_PERIOD as deliveryPeriod,
+            SHIP_TIME as shipTime
         FROM
             sxhdmy_service.contract_c , sxhdmy_service.contract_product_c
         where contract_c.CONTRACT_ID = contract_product_c.CONTRACT_ID and  DATE_FORMAT(CREATE_TIME,'%Y-%m-%d') = #{date};
