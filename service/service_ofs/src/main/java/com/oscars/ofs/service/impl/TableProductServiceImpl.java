@@ -1,6 +1,7 @@
 package com.oscars.ofs.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.oscars.common.R;
 import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.ofs.api.TableOptionFormFactory;
@@ -39,7 +40,9 @@ public class TableProductServiceImpl implements TableProductService {
         List<TableExcelModelDto> rows = new ArrayList<>();
         try {
 
-            rows = JSON.toJavaObject(r.get("rows") , List.class) ;
+//            rows = JSON.toJavaObject(r.get("rows") , List.class) ;
+            System.out.println(r.get("rows"));
+//            rows = JSONObject.parseArray(r.get("rows") , TableExcelModelDto.class);
 
         }catch (Exception e){
             log.error("tans err info {}", r.get("rows"));

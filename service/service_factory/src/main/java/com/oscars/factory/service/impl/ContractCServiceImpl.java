@@ -47,6 +47,9 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
     @Autowired
     private ExtCproductCService extCproductCService;
 
+    @Autowired
+    private ContractCMapper contractCMapper;
+
     @Override
     @Transactional( rollbackFor = QgbExcaption.class)
     public boolean deleteByIdAndProId(String id) {
@@ -226,7 +229,7 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
     @Override
     public List<TableExcelModelDto> queryTableList(String date) {
-        List<TableExcelModelDto> tablist = this.baseMapper.queryTablist(date);
+        List<TableExcelModelDto> tablist = contractCMapper.queryTablist(date);
         return tablist;
     }
 }
