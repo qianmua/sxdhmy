@@ -226,18 +226,7 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
     @Override
     public List<TableExcelModelDto> queryTableList(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date parse = format.parse(date);
-
-            this.baseMapper.selectList();
-
-        } catch (ParseException e) {
-            log.error("date trans err {}" , e.getMessage());
-            return null;
-        }
-
-
-        return null;
+        List<TableExcelModelDto> tablist = this.baseMapper.queryTablist(date);
+        return tablist;
     }
 }

@@ -16,6 +16,11 @@ import java.util.List;
  */
 public interface ContractCMapper extends BaseMapper<ContractC> {
 
-    List<TableExcelModelDto> queryTablist()
+    /**
+     * 查询打印列表
+     * @param date
+     * @return
+     */
+    List<TableExcelModelDto> queryTablist(String date);
 
 }

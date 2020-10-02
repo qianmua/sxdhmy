@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oscars.factory.mapper.ContractCMapper">
     
-    <select id=""
+    <select id="queryTablist" resultType="com.oscars.common.dto.TableExcelModelDto" >
+        SELECT
+            CUSTOM_NAME,CONTRACT_NO ,PRODUCT_NO,CNUMBER,FACTORY,DELIVERY_PERIOD,SHIP_TIME
+        FROM
+            sxhdmy_service.contract_c , sxhdmy_service.contract_product_c
+        where contract_c.CONTRACT_ID = contract_product_c.CONTRACT_ID and  DATE_FORMAT(CREATE_TIME,'%Y-%m-%d') = #{date};
+    </select>
 
 </mapper>
