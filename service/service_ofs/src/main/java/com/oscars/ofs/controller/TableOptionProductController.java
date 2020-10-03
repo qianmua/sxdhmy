@@ -34,7 +34,7 @@ public class TableOptionProductController {
 
     @ApiOperation("根据出货表生成表格数据")
     @GetMapping("/gen/excel")
-    public R gemTable(String time , HttpServletResponse response){
+    public void gemTable(String time , HttpServletResponse response){
         // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
         try {
             response.setContentType("application/vnd.ms-excel");
@@ -48,6 +48,7 @@ public class TableOptionProductController {
 
             EasyExcel.write(response.getOutputStream(), TableExcelModelDto.class)
                     .autoCloseStream(Boolean.FALSE)
+                    .head(hand(time))
                     .sheet("数据")
                     .doWrite(data(time));
 
@@ -63,9 +64,25 @@ public class TableOptionProductController {
                 e.printStackTrace();
             }
         }
+    }
 
-        return R.ok()
-                ;
+    private List<List<String>> hand(String date){
+        List<List<String>> lists = new ArrayList<>();
+
+        final int BASE_VALUE = 8;
+        String[] baseKeys = {"客户" , "订单号" , "货号" , "数量" , "工厂" , "工厂交期" , "船期" ,"贸易条款" };
+        for (int i = 0; i < BASE_VALUE; i++) {
+
+            int finalI = i;
+            lists.add(new ArrayList<String>(){{
+                add(date);
+                add(baseKeys[finalI]);
+            }});
+        }
+
+
+
+        return lists;
     }
 
     private List<TableExcelModelDto> data(String date){

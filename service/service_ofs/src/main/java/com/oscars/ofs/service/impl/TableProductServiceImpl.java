@@ -44,6 +44,8 @@ public class TableProductServiceImpl implements TableProductService {
         try {
 //            rows = JSON.toJavaObject(r.get("rows") , List.class) ;
             System.out.println(r.get("rows"));
+            System.out.println((List<TableExcelModelDto>)r.get("rows"));
+
 //            rows = JSONObject.parseArray(r.get("rows") , TableExcelModelDto.class);
         }catch (Exception e){
             log.error("tans err info {}", r.get("rows"));
