@@ -8,9 +8,7 @@ import com.oscars.ofs.service.TableProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -39,8 +37,8 @@ public class TableOptionProductController {
     }
 
     @ApiOperation("根据出货表生成表格数据")
-    @GetMapping("/gen/excel")
-    public void gemTable(String time , HttpServletResponse response){
+    @PostMapping("/gen/excel")
+    public void gemTable(@RequestBody String time , HttpServletResponse response){
         // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
         try {
             response.setContentType("application/vnd.ms-excel");
