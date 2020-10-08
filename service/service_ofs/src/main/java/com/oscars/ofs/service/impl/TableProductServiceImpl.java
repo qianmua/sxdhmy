@@ -42,11 +42,12 @@ public class TableProductServiceImpl implements TableProductService {
         List<TableExcelModelDto> rows = new ArrayList<>();
 
         try {
+            System.out.println(r);
 //            rows = JSON.toJavaObject(r.get("rows") , List.class) ;
             System.out.println(r.get("rows"));
-            System.out.println((List<TableExcelModelDto>)r.get("rows"));
+//            System.out.println((List<TableExcelModelDto>)r.get("rows"));
 
-//            rows = JSONObject.parseArray(r.get("rows") , TableExcelModelDto.class);
+            rows = (List<TableExcelModelDto>) r.get("rows");
         }catch (Exception e){
             log.error("tans err info {}", r.get("rows"));
             return null;

@@ -111,7 +111,7 @@ public class ContractCController {
 
     @ApiOperation("查询打印信息")
     @GetMapping("/queryTableListByDate")
-    public R tableList(String date){
+    public R tableList(@RequestParam("time") String date){
         List<TableExcelModelDto> list = contractCService.queryTableList(date);
         return list != null ?
                 R.ok().put("rows" , list)

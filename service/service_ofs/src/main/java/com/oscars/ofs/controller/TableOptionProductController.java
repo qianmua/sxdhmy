@@ -32,6 +32,12 @@ public class TableOptionProductController {
     @Autowired
     private TableProductService tableProductService;
 
+    @GetMapping("/test")
+    public List<TableExcelModelDto> test(String time){
+        List<TableExcelModelDto> dataByDate = tableProductService.getGenDataByDate(time);
+        return dataByDate;
+    }
+
     @ApiOperation("根据出货表生成表格数据")
     @GetMapping("/gen/excel")
     public void gemTable(String time , HttpServletResponse response){

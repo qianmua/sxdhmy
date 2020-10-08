@@ -4,6 +4,7 @@ import com.oscars.common.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author HJC
@@ -22,5 +23,5 @@ public interface TableOptionFormFactory {
      * @return
      */
     @GetMapping("/service/factory/contract-c/queryTableListByDate")
-    R tableList(String date);
+    R tableList(@RequestParam("time") String date);
 }
