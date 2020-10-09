@@ -111,11 +111,12 @@ public class ContractCController {
 
     @ApiOperation("查询打印信息")
     @GetMapping("/queryTableListByDate")
-    public R tableList(@RequestParam("time") String date){
+    public List<TableExcelModelDto> tableList(@RequestParam("time") String date){
         List<TableExcelModelDto> list = contractCService.queryTableList(date);
-        return list != null ?
+        /*return list != null ?
                 R.ok().put("rows" , list)
-                : R.error("请检查日期格式，或者联系管理员查看详细日志");
+                : R.error("请检查日期格式，或者联系管理员查看详细日志");*/
+        return list;
     }
 
 

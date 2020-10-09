@@ -4,9 +4,11 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.oscars.common.R;
 import com.oscars.common.dto.TableExcelModelDto;
+import com.oscars.ofs.po.TableExcelPo;
 import com.oscars.ofs.service.TableProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +33,17 @@ public class TableOptionProductController {
     private TableProductService tableProductService;
 
     @GetMapping("/test")
-    public List<TableExcelModelDto> test(String time){
-        List<TableExcelModelDto> dataByDate = tableProductService.getGenDataByDate(time);
-        return dataByDate;
+    public String test(){
+        String time = "2020-09-23";
+        String s = "G://java_Test//aaa.xlsx";
+
+        EasyExcel.write(s, TableExcelPo.class)
+                .autoCloseStream(Boolean.FALSE)
+                .head(hand(time))
+                .sheet("数据")
+                .doWrite(data(time));
+
+        return "success";
     }
 
     @ApiOperation("根据出货表生成表格数据")
@@ -50,7 +60,7 @@ public class TableOptionProductController {
 
             // data
 
-            EasyExcel.write(response.getOutputStream(), TableExcelModelDto.class)
+            EasyExcel.write(response.getOutputStream(), TableExcelPo.class)
                     .autoCloseStream(Boolean.FALSE)
                     .head(hand(time))
                     .sheet("数据")
@@ -76,26 +86,21 @@ public class TableOptionProductController {
         final int BASE_VALUE = 8;
         String[] baseKeys = {"客户" , "订单号" , "货号" , "数量" , "工厂" , "工厂交期" , "船期" ,"贸易条款" };
         for (int i = 0; i < BASE_VALUE; i++) {
-
             int finalI = i;
             lists.add(new ArrayList<String>(){{
-                add(date);
+                add(date + "出货表");
                 add(baseKeys[finalI]);
             }});
         }
-
-
-
         return lists;
     }
 
-    private List<TableExcelModelDto> data(String date){
-        List<TableExcelModelDto> list = new ArrayList<>();
-
+    private List<TableExcelPo> data(String date){
+        List<TableExcelPo> list2 = new ArrayList<>();
         // get data
-        list = tableProductService.getGenDataByDate(date);
+        list2 = tableProductService.getGenDataByDate(date);
 
-        return list;
+        return list2;
     }
 
 }
