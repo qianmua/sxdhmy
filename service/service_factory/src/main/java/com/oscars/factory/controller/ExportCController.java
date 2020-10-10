@@ -25,7 +25,6 @@ public class ExportCController {
     @Autowired
     private ExportCService exportCService;
 
-
     @ApiOperation("新增")
     @GetMapping("/save")
     public R save(@RequestBody String[] ids){
@@ -38,7 +37,6 @@ public class ExportCController {
     @DeleteMapping("/delete/{id}")
     public R delete(@PathVariable String id){
         exportCService.removeById(id);
-
         return R.ok();
     }
 
