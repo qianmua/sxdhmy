@@ -354,6 +354,26 @@ create table EXT_EPRODUCT_C
     ORDER_NO int not null-- 排序号
 );
 
+-- auto-generated definition
+create table packing_list_c
+(
+    PACKING_LIST_ID varchar(40)  not null
+        primary key,
+    EXPORT_IDS      varchar(40)  null,
+    SELLER          varchar(200) null,
+    BUYER           varchar(200) null,
+    INVOICE_NO      varchar(30)  null,
+    INVOICE_DATE    timestamp    null,
+    MARKS           varchar(200) null,
+    DESCRIPTIONS    varchar(200) null,
+    CREATE_BY       varchar(40)  null,
+    CREATE_DEPT     varchar(40)  null,
+    CREATE_TIME     timestamp    null,
+    EXPORT_NOS      varchar(40)  null,
+    STATE           int          null
+);
+
+
 
 
 

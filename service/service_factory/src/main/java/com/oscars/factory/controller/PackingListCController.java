@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 /**
  * <p>
  *  前端控制器
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-10-10
  */
 @RestController
-@RequestMapping("/factory/packing-list-c")
+@RequestMapping("/service/factory/packing-list-c")
 public class PackingListCController {
 
     @Autowired
@@ -26,7 +28,6 @@ public class PackingListCController {
     @ApiOperation("list")
     @PostMapping("/list")
     public R list(){
-
         return R.ok().put("rows" , packingListCService.list());
     }
 
@@ -56,6 +57,13 @@ public class PackingListCController {
     public R remove(@PathVariable String id){
         packingListCService.removeById(id);
         return R.ok();
+    }
+    @ApiOperation("removeBatch")
+    @PostMapping("/removeBatch")
+    public R removeBatch(@RequestBody String[] ids){
+        packingListCService.removeByIds(Arrays.asList(ids));
+        return R.ok();
+
     }
 
 
