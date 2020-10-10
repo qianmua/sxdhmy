@@ -3,6 +3,7 @@ package com.oscars.factory.controller;
 
 import com.oscars.common.R;
 import com.oscars.factory.entity.ExportC;
+import com.oscars.factory.entity.vo.ExportProductVo;
 import com.oscars.factory.service.ExportCService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,8 @@ public class ExportCController {
 
     @ApiOperation("修改")
     @PutMapping("/update")
-    public R update(@RequestBody ExportC exportC){
-        exportCService.updateById(exportC);
-
+    public R update(@RequestBody ExportProductVo exportProductVo){
+        exportCService.updateBatchProduct(exportProductVo);
         return R.ok();
     }
 

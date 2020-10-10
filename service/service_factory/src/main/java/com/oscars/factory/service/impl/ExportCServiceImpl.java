@@ -1,15 +1,19 @@
 package com.oscars.factory.service.impl;
 
+import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.*;
 import com.oscars.factory.entity.vo.ContractItemsVo;
+import com.oscars.factory.entity.vo.ExportProductVo;
 import com.oscars.factory.mapper.ExportCMapper;
 import com.oscars.factory.service.ContractCService;
 import com.oscars.factory.service.ExportCService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oscars.factory.service.ExportProductCService;
+import com.oscars.factory.service.ExtEproductCService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +32,19 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
     private ExportProductCService exportProductCService;
     @Autowired
     private ContractCService contractCService;
+    @Autowired
+    private ExtEproductCService extEproductCService;
+
+    @Override
+    @Transactional(rollbackFor = QgbExcaption.class)
+    public void updateBatchProduct(ExportProductVo exportProductVo) {
+        ExportC exportC = exportProductVo.getExportC();
+        this.updateById(exportC);
+
+        List<ExtEproductC> extEproductCS = exportProductVo.getExtEproductCS();
+        extEproductCService.updateBatchById(extEproductCS);
+
+    }
 
     @Override
     public void addExport(String[] ids) {
