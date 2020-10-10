@@ -117,7 +117,7 @@ public class ExportC implements Serializable {
     private Date createTime;
 
     @TableLogic
-    private Integer delete;
+    private Integer deletes;
 
 
 }

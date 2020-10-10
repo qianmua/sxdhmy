@@ -3,6 +3,7 @@ package com.oscars.factory.controller;
 
 import com.oscars.common.R;
 import com.oscars.factory.entity.ExportC;
+import com.oscars.factory.entity.vo.ExportCVo;
 import com.oscars.factory.entity.vo.ExportProductVo;
 import com.oscars.factory.service.ExportCService;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,7 @@ public class ExportCController {
     private ExportCService exportCService;
 
     @ApiOperation("新增")
-    @GetMapping("/save")
+    @PostMapping("/save")
     public R save(@RequestBody String[] ids){
         exportCService.addExport(ids);
 
@@ -51,11 +52,9 @@ public class ExportCController {
     @ApiOperation("列表")
     @PostMapping("/list")
     public R list(){
-
-        List<ExportC> page = exportCService.list();
-
+        List<ExportCVo> page = exportCService.listExport();
         return R.ok()
-                .put("list" , page);
+                .put("rows" , page);
     }
 
     @ApiOperation("info")

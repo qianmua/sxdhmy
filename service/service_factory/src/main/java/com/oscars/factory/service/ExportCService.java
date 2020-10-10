@@ -2,7 +2,10 @@ package com.oscars.factory.service;
 
 import com.oscars.factory.entity.ExportC;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.oscars.factory.entity.vo.ExportCVo;
 import com.oscars.factory.entity.vo.ExportProductVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,6 @@ public interface ExportCService extends IService<ExportC> {
     void addExport(String[] ids);
 
     void updateBatchProduct(ExportProductVo exportProductVo);
+
+    List<ExportCVo> listExport();
 }

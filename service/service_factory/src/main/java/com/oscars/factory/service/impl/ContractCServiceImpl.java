@@ -81,11 +81,13 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
 
         Page<ContractC> page = new Page<>(current, limit);
         LambdaQueryWrapper<ContractC> wrapper = new LambdaQueryWrapper<>();
-        String contractId = contractItemsVo.getContractId();
-        if (StringUtils.isNotBlank(contractId))
-            wrapper.eq(ContractC::getContractId , contractId);
+        String contractId = null;
+        if (contractItemsVo != null){
+            contractId = contractItemsVo.getContractId();
+            if (StringUtils.isNotBlank(contractId))
+                wrapper.eq(ContractC::getContractId , contractId);
+        }
         this.baseMapper.selectPage(page , wrapper);
-
         // info
         List<ContractC> records = page.getRecords();
 
@@ -142,7 +144,6 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
                         .mapToInt(value -> value).sum();
 
 //                System.out.println(sum);
-
 
                 /*int count1 = extCproductCService.count(new LambdaQueryWrapper<ExtCproductC>()
                         .eq(ExtCproductC::getContractProductId, byId.get(0).getContractProductId()));*/

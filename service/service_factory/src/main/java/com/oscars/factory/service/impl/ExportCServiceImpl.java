@@ -1,9 +1,9 @@
 package com.oscars.factory.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.*;
-import com.oscars.factory.entity.vo.ContractItemsVo;
-import com.oscars.factory.entity.vo.ExportProductVo;
+import com.oscars.factory.entity.vo.*;
 import com.oscars.factory.mapper.ExportCMapper;
 import com.oscars.factory.service.ContractCService;
 import com.oscars.factory.service.ExportCService;
@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -50,34 +52,56 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
     public void addExport(String[] ids) {
         ExportC exportC = new ExportC();
 
-        String join = String.join(" ", ids);
+        String join = String.join(",", ids);
         exportC.setState(0);
-        exportC.setCustomerContract(join);
+
+        String[] array = Arrays.stream(ids).map(c -> {
+            ContractC byId = contractCService.getById(c);
+            return byId.getContractNo();
+        }).toArray(String[]::new);
+        String s = String.join(" ", array);
+        exportC.setCustomerContract(s);
         exportC.setContractIds(join);
+        exportC.setState(0);
 
         this.save(exportC);
 
         /// item
         Arrays.stream(ids).forEach(v1 -> {
-            ContractItemsVo vo = new ContractItemsVo();
-            vo.setContractId(v1);
-            List<ContractItemsVo> voList = contractCService.queryByCondition(1, 100, vo);
+            ContractItemVo itemVo = contractCService.queryItems(v1);
+            List<ContractProductitemVo> vos = itemVo.getContractProductC();
+            vos.forEach(cpv -> {
+                ExportProductC productC1 = new ExportProductC();
+                productC1.setExportId(exportC.getExportId());
+                BeanUtils.copyProperties(cpv.getContractProductC() , productC1);
 
-            voList.forEach(ep ->{
-                ExportProductC productC = new ExportProductC();
-                productC.setExportId(exportC.getExportId());
-                BeanUtils.copyProperties(ep , productC);
-                exportProductCService.save(productC);
+                exportProductCService.save(productC1);
 
-                ExtEproductC extEproductC = new ExtEproductC();
-                BeanUtils.copyProperties(ep , extEproductC);
-                extEproductC.setExportProductId(productC.getExportProductId());
+                cpv.getExtCproductCS().forEach(ecs ->{
+                    ExtEproductC eproductC = new ExtEproductC();
+                    eproductC.setExportProductId(productC1.getExportProductId());
+                    BeanUtils.copyProperties(ecs , eproductC);
+                    extEproductCService.save(eproductC);
+                });
             });
+        });
+    }
+
+    @Override
+    public List<ExportCVo> listExport() {
+        List<ExportC> list = this.list();
+        List<ExportCVo> fl = new ArrayList<>();
+        list.forEach(v1 -> {
+            ExportCVo cVo = new ExportCVo();
+            String id = v1.getExportId();
+            int count = exportProductCService
+                    .count(new LambdaQueryWrapper<ExportProductC>().eq(ExportProductC::getExportId, id));
+
+            cVo.setCnumber(count);
+
 
         });
 
-
-
-
+        return fl;
     }
 }
