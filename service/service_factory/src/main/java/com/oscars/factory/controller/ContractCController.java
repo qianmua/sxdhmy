@@ -120,5 +120,14 @@ public class ContractCController {
     }
 
 
+    @ApiOperation("报运")
+    @PostMapping("/export")
+    public R export(@RequestBody String[] ids){
+        contractCService.addExport(ids);
+
+        return R.ok();
+    }
+
+
 }
 

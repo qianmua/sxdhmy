@@ -27,7 +27,7 @@ public class ExportC implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "EXPORT_ID", type = IdType.ASSIGN_ID)
+    @TableId(value = "EXPORT_ID", type = IdType.ASSIGN_ID)
     private String exportId;
 
     @TableField("INPUT_DATE")

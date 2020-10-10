@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ExportCService extends IService<ExportC> {
 
+    void addExport(String[] ids);
 }

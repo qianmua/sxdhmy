@@ -32,4 +32,6 @@ public interface ContractCService extends IService<ContractC> {
     ContractItemVo queryItems(String id);
 
     List<TableExcelModelDto> queryTableList(String date);
+
+    void addExport(String[] ids);
 }

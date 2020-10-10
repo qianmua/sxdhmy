@@ -8,6 +8,7 @@ import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.common.exception.QgbExcaption;
 import com.oscars.factory.entity.ContractC;
 import com.oscars.factory.entity.ContractProductC;
+import com.oscars.factory.entity.ExportC;
 import com.oscars.factory.entity.ExtCproductC;
 import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
@@ -79,7 +80,11 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
     public List<ContractItemsVo> queryByCondition(long current, long limit, ContractItemsVo contractItemsVo) {
 
         Page<ContractC> page = new Page<>(current, limit);
-        this.baseMapper.selectPage(page , null);
+        LambdaQueryWrapper<ContractC> wrapper = new LambdaQueryWrapper<>();
+        String contractId = contractItemsVo.getContractId();
+        if (StringUtils.isNotBlank(contractId))
+            wrapper.eq(ContractC::getContractId , contractId);
+        this.baseMapper.selectPage(page , wrapper);
 
         // info
         List<ContractC> records = page.getRecords();
@@ -231,5 +236,16 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
     public List<TableExcelModelDto> queryTableList(String date) {
         List<TableExcelModelDto> tablist = contractCMapper.queryTablist(date);
         return tablist;
+    }
+
+    @Override
+    public void addExport(String[] ids) {
+
+//        String join = String.join(" ", ids);
+//        ExportC c = new ExportC();
+//        c.setContractIds(join);
+//        c.setCustomerContract(join);
+//        c.setState(0);
+
     }
 }
