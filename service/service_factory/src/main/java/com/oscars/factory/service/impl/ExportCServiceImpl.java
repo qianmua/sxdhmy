@@ -63,6 +63,7 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
         exportC.setCustomerContract(s);
         exportC.setContractIds(join);
         exportC.setState(0);
+        exportC.setDeletes(0);
 
         this.save(exportC);
 
@@ -93,12 +94,28 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
         List<ExportCVo> fl = new ArrayList<>();
         list.forEach(v1 -> {
             ExportCVo cVo = new ExportCVo();
+
+            cVo.setNumber2(0);
+            cVo.setNumber(0);
+
+
             String id = v1.getExportId();
             int count = exportProductCService
                     .count(new LambdaQueryWrapper<ExportProductC>().eq(ExportProductC::getExportId, id));
 
-            cVo.setCnumber(count);
+            cVo.setNumber(count);
+            List<ExportProductC> exportProductCS = exportProductCService
+                    .list(new LambdaQueryWrapper<ExportProductC>().eq(ExportProductC::getExportId, id));
+            if (!exportProductCS.isEmpty()){
+                int sum = exportProductCS.stream().map(ExportProductC::getExportProductId).map(epId ->
+                        extEproductCService.count(new LambdaQueryWrapper<ExtEproductC>().eq(ExtEproductC::getExportProductId, epId))
+                ).collect(Collectors.toList()).stream().mapToInt(v -> v).sum();
+                cVo.setNumber2(sum);
 
+            }
+
+            BeanUtils.copyProperties(v1 , cVo);
+            fl.add(cVo);
 
         });
 

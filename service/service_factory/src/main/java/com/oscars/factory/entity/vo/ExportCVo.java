@@ -45,7 +45,9 @@ public class ExportCVo {
     private String createDept;
     private Date createTime;
     private Integer deletes;
+
     private Integer number;
+
     private Integer number2;
 }
 

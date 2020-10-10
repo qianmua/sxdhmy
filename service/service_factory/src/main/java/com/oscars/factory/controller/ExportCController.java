@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,11 +42,20 @@ public class ExportCController {
         exportCService.removeById(id);
         return R.ok();
     }
+    @ApiOperation("批量删除")
+    @PostMapping("/removeBatch")
+    public R removeBatch(@RequestBody String[] ids){
+
+        exportCService.removeByIds(Arrays.asList(ids));
+
+        return R.ok();
+    }
 
     @ApiOperation("修改")
     @PutMapping("/update")
-    public R update(@RequestBody ExportProductVo exportProductVo){
-        exportCService.updateBatchProduct(exportProductVo);
+    public R update(@RequestBody ExportC exportC){
+//        exportCService.updateBatchProduct(exportProductVo);
+        exportCService.updateById(exportC);
         return R.ok();
     }
 
@@ -60,9 +70,9 @@ public class ExportCController {
     @ApiOperation("info")
     @GetMapping("/info/{id}")
     public R info(@PathVariable String id){
-        exportCService.getById(id);
+        ExportC byId = exportCService.getById(id);
 
-        return R.ok();
+        return R.ok().put("data" , byId);
     }
 
 }
