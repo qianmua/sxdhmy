@@ -31,6 +31,13 @@ public class ContractItemsVo {
     private String contractNo;
     private Integer cnumber;
     private Integer extCnumber;
+
+    private String factoryId;
+    private String factory;
+    private Integer boxNum;
+    private Float price;
+    private String productNo;
+
     private String inputBy;
     private String checkBy;
     private String inspector;

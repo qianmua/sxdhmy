@@ -2,6 +2,7 @@ package com.oscars.ofs.service.impl;
 
 import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.ofs.api.TableOptionFormFactory;
+import com.oscars.ofs.dto.ContractItemVo;
 import com.oscars.ofs.po.TableExcelPo;
 import com.oscars.ofs.service.TableProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,4 +37,14 @@ public class TableProductServiceImpl implements TableProductService {
         List<TableExcelPo> pos = tableOptionFormFactory.tableList(date);
         return pos;
     }
+
+    @Override
+    public ContractItemVo itemsContractInfo(String id) {
+        ContractItemVo contractItemVo = tableOptionFormFactory.itemsContractInfo(id);
+
+
+        return contractItemVo;
+    }
+
+
 }

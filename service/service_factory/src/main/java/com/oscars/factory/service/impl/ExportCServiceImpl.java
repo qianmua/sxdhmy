@@ -1,15 +1,13 @@
 package com.oscars.factory.service.impl;
 
-import com.oscars.factory.entity.ContractC;
-import com.oscars.factory.entity.ExportC;
-import com.oscars.factory.entity.ExportProductC;
-import com.oscars.factory.entity.vo.ContractItemVo;
+import com.oscars.factory.entity.*;
 import com.oscars.factory.entity.vo.ContractItemsVo;
 import com.oscars.factory.mapper.ExportCMapper;
 import com.oscars.factory.service.ContractCService;
 import com.oscars.factory.service.ExportCService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.oscars.factory.service.ExportProductCService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +45,17 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
             ContractItemsVo vo = new ContractItemsVo();
             vo.setContractId(v1);
             List<ContractItemsVo> voList = contractCService.queryByCondition(1, 100, vo);
+
+            voList.forEach(ep ->{
+                ExportProductC productC = new ExportProductC();
+                productC.setExportId(exportC.getExportId());
+                BeanUtils.copyProperties(ep , productC);
+                exportProductCService.save(productC);
+
+                ExtEproductC extEproductC = new ExtEproductC();
+                BeanUtils.copyProperties(ep , extEproductC);
+                extEproductC.setExportProductId(productC.getExportProductId());
+            });
 
         });
 

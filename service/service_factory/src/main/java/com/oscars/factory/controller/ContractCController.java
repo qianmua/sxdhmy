@@ -6,6 +6,7 @@ import com.oscars.common.dto.TableExcelModelDto;
 import com.oscars.factory.entity.ContractC;
 import com.oscars.factory.entity.vo.ContractItemVo;
 import com.oscars.factory.entity.vo.ContractItemsVo;
+import com.oscars.factory.entity.vo.ContractProductitemVo;
 import com.oscars.factory.service.ContractCService;
 import com.oscars.factory.service.ContractProductCService;
 import io.swagger.annotations.Api;
@@ -109,7 +110,21 @@ public class ContractCController {
 
     }
 
-    @ApiOperation("查询打印信息")
+    @ApiOperation("查询购销合同打印信息")
+    @PostMapping("/queryItemByTime")
+    public ContractItemVo itemsContractInfo( @RequestParam("id") String id){
+        ContractItemVo contractItemVo = contractCService.queryItems(id);
+        List<ContractProductitemVo> c = contractItemVo.getContractProductC();
+        List<ContractProductitemVo> collect = c.stream().map(v1 -> {
+            ContractProductitemVo vo = new ContractProductitemVo();
+            vo.setContractProductC(v1.getContractProductC());
+            return vo;
+        }).collect(Collectors.toList());
+        contractItemVo.setContractProductC(collect);
+        return contractItemVo;
+    }
+
+    @ApiOperation("查询货物打印信息")
     @GetMapping("/queryTableListByDate")
     public List<TableExcelModelDto> tableList(@RequestParam("time") String date){
         List<TableExcelModelDto> list = contractCService.queryTableList(date);

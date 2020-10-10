@@ -1,14 +1,14 @@
-package com.oscars.factory.entity;
+package com.oscars.ofs.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -16,33 +16,22 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author qianmuna
- * @since 2020-10-10
+ * @since 2020-09-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ExportProductC对象", description="")
-public class ExportProductC implements Serializable {
+public class ContractProductC implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "EXPORT_PRODUCT_ID", type = IdType.ASSIGN_ID)
-    private String exportProductId;
-
-    @TableField("CONTRACT_PRODUCT_ID")
     private String contractProductId;
-
-    @TableField("EXPORT_ID")
-    private String exportId;
-
-    @TableField("FACTORY_ID")
-    private String factoryId;
 
     @TableField("CONTRACT_ID")
     private String contractId;
 
-    @TableField("CONTRACT_NO")
-    private String contractNo;
+    @TableField("FACTORY_ID")
+    private String factoryId;
 
     @TableField("PRODUCT_NAME")
     private String productName;
