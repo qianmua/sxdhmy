@@ -7,11 +7,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -33,6 +35,8 @@ public class ExportC implements Serializable {
     private String exportId;
 
     @TableField("INPUT_DATE")
+    @JsonFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date inputDate;
 
     @TableField("CONTRACT_IDS")
@@ -114,6 +118,8 @@ public class ExportC implements Serializable {
     private String createDept;
 
     @TableField("CREATE_TIME")
+    @JsonFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date createTime;
 
     @TableLogic

@@ -46,6 +46,8 @@ public class PackingListC implements Serializable {
     private String invoiceNo;
 
     @TableField("INVOICE_DATE")
+    @JsonFormat( pattern = "yyyy-MM-dd")
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date invoiceDate;
 
     @TableField("MARKS")

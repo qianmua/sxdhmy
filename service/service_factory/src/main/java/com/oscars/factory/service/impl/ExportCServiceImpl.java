@@ -55,10 +55,14 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
         String join = String.join(",", ids);
         exportC.setState(0);
 
-        String[] array = Arrays.stream(ids).map(c -> {
-            ContractC byId = contractCService.getById(c);
-            return byId.getContractNo();
-        }).toArray(String[]::new);
+        String[] array = Arrays.stream(ids)
+                .map(c -> {
+                    ContractC byId = contractCService.getById(c);
+                    return byId.getContractNo();
+                })
+                .toArray(String[]::new);
+
+
         String s = String.join(" ", array);
         exportC.setCustomerContract(s);
         exportC.setContractIds(join);
@@ -82,6 +86,7 @@ public class ExportCServiceImpl extends ServiceImpl<ExportCMapper, ExportC> impl
                     ExtEproductC eproductC = new ExtEproductC();
                     eproductC.setExportProductId(productC1.getExportProductId());
                     BeanUtils.copyProperties(ecs , eproductC);
+
                     extEproductCService.save(eproductC);
                 });
             });

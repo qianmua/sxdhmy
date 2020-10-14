@@ -185,6 +185,7 @@ public class ContractCServiceImpl extends ServiceImpl<ContractCMapper, ContractC
         ContractC byId = this.getById(id);
         // All info
         ContractItemVo vo = new ContractItemVo();
+
         if (Optional.ofNullable(byId).isPresent()) {
             // 合同下 货物
             List<ContractProductC> list = contractProductCService.list(new LambdaQueryWrapper<ContractProductC>()
