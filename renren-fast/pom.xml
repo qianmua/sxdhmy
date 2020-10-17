@@ -275,6 +275,13 @@
 				<configuration>
 					<fork>true</fork>
 				</configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
 			</plugin>
 			<!-- 跳过单元测试 -->
 			<plugin>
