@@ -1,5 +1,5 @@
 FROM java:8
-EXPOSE 8080
+EXPOSE 8050
 
 VOLUME /tmp
 ADD ofs.jar /app.jar

@@ -4,9 +4,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sxhdmy_service?serverTimezone=GMT%2B8
+    url: jdbc:mysql://47.96.230.44:3306/sxhdmy_service?serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: MyNewPass4!
     #druid 数据源专有配置
     initialSize: 5
     minIdle: 5
@@ -19,7 +19,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 139.196.166.75:8848
   application:
     name: sxdhmy-factory
 

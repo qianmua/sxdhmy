@@ -1,5 +1,5 @@
 FROM java:8
-EXPOSE 8080
+EXPOSE 8002
 
 VOLUME /tmp
 ADD factory.jar /app.jar
