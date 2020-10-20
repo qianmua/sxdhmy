@@ -2,6 +2,9 @@
 
 # 德宏贸易管理平台
 
+    包含后端项目 sxdhmy
+    前端项目请移步 sxdhmy-admin
+
 ## 项目架构
 
     后端采用 Springboot + SpringCloud2.0 + mysql

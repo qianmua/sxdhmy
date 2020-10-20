@@ -3,9 +3,11 @@ spring:
         type: com.alibaba.druid.pool.DruidDataSource
         druid:
             driver-class-name: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://47.96.230.44:3306/sxhdmy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#            url: jdbc:mysql://localhost:3306/sxhdmy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+            url: jdbc:mysql://47.96.230.44:3306/sxhdmy?serverTimezone=GMT%2B8
             username: root
             password: MyNewPass4!
+#            password: MyNewPass4!
             initial-size: 10
             max-active: 100
             min-idle: 10
@@ -35,7 +37,7 @@ spring:
     cloud:
       nacos:
         discovery:
-          server-addr: 127.0.0.1:8848
+          server-addr: 139.196.166.75:8848
     application:
       name: renren-fast
 ##多数据源的配置
